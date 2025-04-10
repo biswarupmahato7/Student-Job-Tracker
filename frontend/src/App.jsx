@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,6 +12,7 @@ function App() {
   const [filterDate, setFilterDate] = useState("");
 
   useEffect(() => {
+    // Fetch applications once on component mount
     axios
       .get("https://student-job-tracker-zdt8.onrender.com/api/job-applications")
       .then((response) => setApplications(response.data))
@@ -21,20 +21,37 @@ function App() {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.patch(`https://student-job-tracker-zdt8.onrender.com/api/job-applications/${id}`, {
-        status: newStatus,
-      });
-      const response = await axios.get("https://student-job-tracker-zdt8.onrender.com/api/job-applications");
-      setApplications(response.data);
+      // Update the status of the specific application
+      const updatedApplication = await axios.patch(
+        `https://student-job-tracker-zdt8.onrender.com/api/job-applications/${id}`,
+        { status: newStatus }
+      );
+
+      // Update the local state by replacing the application with the new status
+      setApplications((prevApplications) =>
+        prevApplications.map((app) =>
+          app._id === id ? { ...app, status: newStatus } : app
+        )
+      );
+      
       toast.success(`Status updated to ${newStatus}!`);
     } catch (error) {
-      toast.error("Error updating status!",error);
+      toast.error("Error updating status!", error);
     }
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`https://student-job-tracker-zdt8.onrender.com/api/job-applications/${id}`);
-    setApplications(applications.filter((app) => app._id !== id));
+    try {
+      // Delete the application
+      await axios.delete(`https://student-job-tracker-zdt8.onrender.com/api/job-applications/${id}`);
+      // Optimistically update the state (delete from the local list)
+      setApplications((prevApplications) =>
+        prevApplications.filter((app) => app._id !== id)
+      );
+      toast.success("Application deleted!");
+    } catch (error) {
+      toast.error("Error deleting application!", error);
+    }
   };
 
   // Function to return status color based on status type
@@ -55,8 +72,11 @@ function App() {
 
   const filteredApplications = applications.filter((app) => {
     const statusMatch = filterStatus ? app.status === filterStatus : true;
-    const appDate = new Date(app.date).toISOString().split("T")[0];
+    
+    // Safe date handling: Ensure app.date exists and is valid
+    const appDate = app.date ? new Date(app.date).toISOString().split("T")[0] : null;
     const dateMatch = filterDate ? appDate === filterDate : true;
+    
     return statusMatch && dateMatch;
   });
 

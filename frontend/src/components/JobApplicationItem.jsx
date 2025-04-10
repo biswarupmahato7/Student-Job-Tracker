@@ -1,7 +1,11 @@
-
 import React from "react";
 
 const JobApplicationItem = ({ app, handleStatusChange, handleDelete, getStatusColor }) => {
+  // Safe date formatting
+  const formattedDate = app.date
+    ? new Date(app.date).toLocaleDateString()
+    : "Date not available";
+
   return (
     <li className="bg-gray-400 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
       <div className="text-lg font-semibold">
@@ -10,7 +14,7 @@ const JobApplicationItem = ({ app, handleStatusChange, handleDelete, getStatusCo
       <div className={`text-white font-bold p-2 rounded-md ${getStatusColor(app.status)}`}>
         Status: {app.status}
       </div>
-      <div className="text-gray-600 mt-2">Applied on: {new Date(app.date).toLocaleDateString()}</div>
+      <div className="text-gray-600 mt-2">Applied on: {formattedDate}</div>
 
       <div className="space-x-4 mt-4">
         <select

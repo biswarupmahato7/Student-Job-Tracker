@@ -18,11 +18,16 @@ export const addJobApplication = async (req, res) => {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
+  // Check if the date is valid
+  if (isNaN(Date.parse(date))) {
+    return res.status(400).json({ message: 'Invalid date format' });
+  }
+
   const jobApplication = new JobApplication({
     company,
     role,
     status,
-    date,
+    date: new Date(date),  // Ensure the date is properly converted
     link
   });
 
@@ -33,6 +38,7 @@ export const addJobApplication = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+
 
 
 // Update job application status
