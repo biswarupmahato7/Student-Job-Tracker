@@ -10,9 +10,13 @@ export const getJobApplications = async (req, res) => {
   }
 };
 
-// Add a job application
 export const addJobApplication = async (req, res) => {
   const { company, role, status, date, link } = req.body;
+
+  // Validate the input data
+  if (!company || !role || !status || !date || !link) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
 
   const jobApplication = new JobApplication({
     company,
@@ -29,6 +33,7 @@ export const addJobApplication = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+
 
 // Update job application status
 export const updateJobStatus = async (req, res) => {

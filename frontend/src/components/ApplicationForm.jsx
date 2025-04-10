@@ -11,17 +11,33 @@ const ApplicationForm = ({ onApplicationAdded }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Ensure date is set
+    if (!date) {
+      alert('Please select a date!');
+      return;
+    }
+  
     const newApplication = { company, role, status, date, link };
-    await axios.post("https://student-job-tracker-zdt8.onrender.com/api/job-applications", newApplication);
-    setCompany("");
-    setRole("");
-    setStatus("Applied");
-    setDate("");
-    setLink("");
-    
-    // Notify parent component about the new application
-    onApplicationAdded();
+  
+    try {
+      // Send the POST request to add the application
+      await axios.post("https://student-job-tracker-zdt8.onrender.com/api/job-applications", newApplication);
+  
+      // Clear form fields after submission
+      setCompany("");
+      setRole("");
+      setStatus("Applied");
+      setDate("");
+      setLink("");
+  
+      // Notify parent component about the new application
+      onApplicationAdded();
+    } catch (error) {
+      console.error("Error adding application:", error);
+    }
   };
+  
 
   return (
     <form onSubmit={handleSubmit} className="bg-gray-500 p-6 rounded-lg shadow-xl space-y-6 transition-all font-bold hover:shadow-2xl">
