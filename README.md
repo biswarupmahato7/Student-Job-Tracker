@@ -8,6 +8,20 @@ Student Job Tracker is a web application designed to help students manage and tr
 - **Secure Authentication**: Handle user authentication securely (if required).
 - **JWT-based Authentication**: For secure interaction with the backend API.
 
+🖥️ Job Application Dashboard
+An overview of all your job applications in one place.
+![Image](https://github.com/user-attachments/assets/224f7a35-b238-4586-a8d9-ad7087f6e3b5)
+
+📝 Add New Job Application
+Easily add new job applications with the necessary details.
+![Image](https://github.com/user-attachments/assets/9853a49d-1e7f-4752-9191-613d9330b8b8)
+
+
+🔄 Update Job Application Status
+Update the status of each job application (e.g., Applied, Interview, Offer, Rejected).
+![Image](https://github.com/user-attachments/assets/1de07585-ca00-439d-8767-de6b14677882)
+
+
 ### 📋 Job Application Tracking
 - Track job applications by company, role, application date, status, and link.
 - Easily add, edit, and delete job applications.
