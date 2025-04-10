@@ -7,7 +7,7 @@ const JobApplicationItem = ({ app, handleStatusChange, handleDelete, getStatusCo
       <div className="text-lg font-semibold">
         {app.company} - {app.role}
       </div>
-      <div className={`text-white p-2 rounded-md ${getStatusColor(app.status)}`}>
+      <div className={`text-white font-bold p-2 rounded-md ${getStatusColor(app.status)}`}>
         Status: {app.status}
       </div>
       <div className="text-gray-600 mt-2">Applied on: {new Date(app.date).toLocaleDateString()}</div>
