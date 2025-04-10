@@ -1,4 +1,4 @@
-// src/App.jsx
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -28,7 +28,7 @@ function App() {
       setApplications(response.data);
       toast.success(`Status updated to ${newStatus}!`);
     } catch (error) {
-      toast.error("Error updating status!");
+      toast.error("Error updating status!",error);
     }
   };
 
@@ -60,6 +60,10 @@ function App() {
     return statusMatch && dateMatch;
   });
 
+  const handleApplicationAdded = (newApplication) => {
+    setApplications((prevApplications) => [...prevApplications, newApplication]);
+  };
+
   return (
     <div className="min-h-screen bg-gray-700 py-6 flex flex-col justify-center sm:py-12">
       <div className="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -67,7 +71,7 @@ function App() {
           Student Job Tracker
         </h1>
 
-        <ApplicationForm onApplicationAdded={() => setApplications([...applications])} />
+        <ApplicationForm onApplicationAdded={handleApplicationAdded} />
 
         <Filters
           filterStatus={filterStatus}
