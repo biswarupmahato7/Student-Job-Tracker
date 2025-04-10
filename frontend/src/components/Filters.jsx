@@ -1,4 +1,3 @@
-// src/components/Filters.jsx
 import React from "react";
 
 const Filters = ({ filterStatus, setFilterStatus, filterDate, setFilterDate }) => {

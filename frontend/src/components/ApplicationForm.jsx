@@ -36,7 +36,7 @@ const ApplicationForm = ({ onApplicationAdded }) => {
       setErrorMessage(""); // Clear any previous error messages
 
       // Notify parent component about the new application
-      onApplicationAdded();
+      onApplicationAdded(newApplication); // Pass the new application directly
     } catch (error) {
       console.error("Error adding application:", error);
       setErrorMessage("Error adding application. Please try again.");

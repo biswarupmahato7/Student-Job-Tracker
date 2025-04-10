@@ -2,7 +2,7 @@ import React from "react";
 
 const JobApplicationItem = ({ app, handleStatusChange, handleDelete, getStatusColor }) => {
   // Safe date formatting
-  const formattedDate = app.date
+  const formattedDate = app.date && !isNaN(new Date(app.date))
     ? new Date(app.date).toLocaleDateString()
     : "Date not available";
 

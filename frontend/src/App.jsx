@@ -71,10 +71,15 @@ function App() {
   };
 
   const filteredApplications = applications.filter((app) => {
+    // Ensure app is a valid object
+    if (!app || typeof app !== "object") return false;
+
     const statusMatch = filterStatus ? app.status === filterStatus : true;
     
-    // Safe date handling: Ensure app.date exists and is valid
-    const appDate = app.date ? new Date(app.date).toISOString().split("T")[0] : null;
+    // Safely handle app.date; default to null if undefined or invalid
+    const appDate = app.date && !isNaN(new Date(app.date))
+      ? new Date(app.date).toISOString().split("T")[0]
+      : null;
     const dateMatch = filterDate ? appDate === filterDate : true;
     
     return statusMatch && dateMatch;
