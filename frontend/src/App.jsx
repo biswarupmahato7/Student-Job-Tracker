@@ -14,17 +14,17 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/job-applications")
+      .get("https://student-job-tracker-zdt8.onrender.com/api/job-applications")
       .then((response) => setApplications(response.data))
       .catch((error) => console.error(error));
   }, []);
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.patch(`http://localhost:5000/api/job-applications/${id}`, {
+      await axios.patch(`https://student-job-tracker-zdt8.onrender.com/api/job-applications/${id}`, {
         status: newStatus,
       });
-      const response = await axios.get("http://localhost:5000/api/job-applications");
+      const response = await axios.get("https://student-job-tracker-zdt8.onrender.com/api/job-applications");
       setApplications(response.data);
       toast.success(`Status updated to ${newStatus}!`);
     } catch (error) {
@@ -33,7 +33,7 @@ function App() {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/job-applications/${id}`);
+    await axios.delete(`https://student-job-tracker-zdt8.onrender.com/api/job-applications/${id}`);
     setApplications(applications.filter((app) => app._id !== id));
   };
 

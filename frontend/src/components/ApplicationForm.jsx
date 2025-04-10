@@ -12,7 +12,7 @@ const ApplicationForm = ({ onApplicationAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newApplication = { company, role, status, date, link };
-    await axios.post("http://localhost:5000/api/job-applications", newApplication);
+    await axios.post("https://student-job-tracker-zdt8.onrender.com/api/job-applications", newApplication);
     setCompany("");
     setRole("");
     setStatus("Applied");
