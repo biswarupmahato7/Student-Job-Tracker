@@ -4,9 +4,7 @@ Student Job Tracker is a web application designed to help students manage and tr
 
 ## 🚀 Features
 
-### 🔐 Authentication & Security
-- **Secure Authentication**: Handle user authentication securely (if required).
-- **JWT-based Authentication**: For secure interaction with the backend API.
+
 
 🖥️ Job Application Dashboard
 An overview of all your job applications in one place.
@@ -42,7 +40,7 @@ Update the status of each job application (e.g., Applied, Interview, Offer, Reje
 - **Frontend**: React, Tailwind CSS, React Toastify
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
-- **Deployment**: Render or Heroku (Optional)
+- **Deployment**: Vercel and Render
 
 
 ## 🔧 Installation & Setup
